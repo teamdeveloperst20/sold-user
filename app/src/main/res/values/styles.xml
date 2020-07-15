@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
+
+    <!-- Widgets -->
+    <style name="LayoutParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
+    <style name="TextRegular">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorForeground</item>
+    </style>
+
+    <style name="TextBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorForeground</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SeparatorHorz">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/separator</item>
+        <item name="android:background">@color/colorSeparator</item>
+    </style>
+
+    <style name="SeparatorVert">
+        <item name="android:layout_width">@dimen/separator</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorSeparator</item>
+    </style>
+
+    <style name="SeparatorDashboardHorz">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/separator</item>
+        <item name="android:background">@color/colorSeparatorDashboard</item>
+    </style>
+
+    <style name="SeparatorDashboardVert">
+        <item name="android:layout_width">@dimen/separator</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorSeparatorDashboard</item>
+    </style>
+
+    <!-- Home -->
+
+    <style name="DashboardItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="DashboardItemIcon">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginTop">@dimen/padding_half</item>
+    </style>
+
+    <style name="DashboardItemTitle" parent="TextRegular">
+        <item name="android:layout_marginTop">@dimen/padding_half</item>
+        <item name="android:layout_marginStart">@dimen/padding_half</item>
+        <item name="android:layout_marginEnd">@dimen/padding_half</item>
+    </style>
+
+</resources>

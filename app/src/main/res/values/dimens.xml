@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default -->
+    <dimen name="separator">.9dp</dimen>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="padding_half">8dp</dimen>
+    <dimen name="padding_double">32dp</dimen>
+    <dimen name="padding_drawable">4dp</dimen>
+    <dimen name="radius">12dp</dimen>
+
+    <!-- Text -->
+    <dimen name="extra_small_text">10sp</dimen>
+    <dimen name="small_text">12sp</dimen>
+    <dimen name="normal_text">16sp</dimen>
+    <dimen name="large_text">18sp</dimen>
+    <dimen name="extra_large">20sp</dimen>
+    <dimen name="over_extra_large">24sp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="elevation_toolbar">0dp</dimen>
+
+    <!-- Home page -->
+    <dimen name="height_slider">188dp</dimen>
+    <dimen name="radius_slider">16dp</dimen>
+    <dimen name="elevation_slider">6dp</dimen>
+    <dimen name="radius_dashboard">16dp</dimen>
+    <dimen name="elevation_dashboard">2dp</dimen>
+    <dimen name="elevation_z_dashboard">4dp</dimen>
+
+</resources>
