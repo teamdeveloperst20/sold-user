@@ -2,34 +2,49 @@ package in.sold.app.frags;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.rd.PageIndicatorView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import in.sold.app.R;
+import in.sold.app.acts.FragmentActivity;
 import in.sold.app.adapters.CityAdapter;
-import in.sold.app.adapters.DashboardAdapter;
 import in.sold.app.adapters.SliderAdapter;
+import in.sold.app.models.Banner;
 import in.sold.app.models.City;
-import in.sold.app.models.DashboardItem;
-import in.sold.app.models.Slider;
+import in.sold.app.network.Config;
+import in.sold.app.network.VolleyQueue;
 
 public class HomeFragment extends Fragment {
     // Vars
@@ -40,10 +55,15 @@ public class HomeFragment extends Fragment {
     // Widgets
     private ViewPager sliderViewPager;
     private PageIndicatorView sliderIndicator;
-    private RecyclerView listDashboard;
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -56,8 +76,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
-        setSliders();
-        setDashboardItems();
+        loadBanners();
         return view;
     }
 
@@ -71,8 +90,18 @@ public class HomeFragment extends Fragment {
         LinearLayout layoutLocation = view.findViewById(R.id.layoutLocation);
         layoutLocation.setOnClickListener(v -> showCities());
 
-        listDashboard = view.findViewById(R.id.listDashboard);
-        listDashboard.setLayoutManager(new GridLayoutManager(context, 2));
+        LinearLayout itemPhone = view.findViewById(R.id.itemPhone);
+        LinearLayout itemTablet = view.findViewById(R.id.itemTablet);
+        LinearLayout itemSmartWatch = view.findViewById(R.id.itemSmartWatch);
+        LinearLayout itemRecycle = view.findViewById(R.id.itemRecycle);
+
+        itemPhone.setOnClickListener(v -> showBrands("1"));
+        itemTablet.setOnClickListener(v -> showBrands("3"));
+        itemSmartWatch.setOnClickListener(v -> showBrands("2"));
+    }
+
+    private void showBrands(String type) {
+        startActivity(new Intent(context, FragmentActivity.class).putExtra("type", type));
     }
 
     private void showCities() {
@@ -97,33 +126,68 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void setDashboardItems() {
-        ArrayList<DashboardItem> dashboardItems = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            DashboardItem item = new DashboardItem();
-            item.setTitle("Item" + i);
-            dashboardItems.add(item);
-        }
+    private void loadBanners() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, Config.BANNER_URL, null, response -> {
 
-        DashboardAdapter dashboardAdapter = new DashboardAdapter(dashboardItems);
-        listDashboard.setAdapter(dashboardAdapter);
-    }
+                    if (response != null) {
 
-    private void setSliders() {
-        ArrayList<Slider> sliders = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            Slider slider = new Slider();
-            slider.setImage("https://bit.ly/srj-demo-img");
-            slider.setTitle("This was for testing purposes");
-            sliders.add(slider);
-        }
+                        Log.d(TAG, "onResponse: response = " + response.toString());
 
-        SliderAdapter sliderAdapter = new SliderAdapter(sliders, context);
-        sliderViewPager.setAdapter(sliderAdapter);
-        sliderIndicator.setViewPager(sliderViewPager);
+                        try {
+                            JSONObject statusObject = response.getJSONArray("response")
+                                    .getJSONObject(0);
 
-        totalSliders = sliders.size();
-        setAutoSlide();
+                            if (statusObject.getString("status").equals("1")) {
+
+                                JSONArray bannersArray = response.getJSONArray("banners");
+                                if (bannersArray.length() > 0) {
+
+                                    Type type = new TypeToken<List<Banner>>() {
+                                    }.getType();
+                                    ArrayList<Banner> banners = new Gson()
+                                            .fromJson(bannersArray.toString(), type);
+
+                                    SliderAdapter sliderAdapter = new SliderAdapter(banners, context);
+                                    sliderViewPager.setAdapter(sliderAdapter);
+                                    sliderIndicator.setViewPager(sliderViewPager);
+
+                                    totalSliders = banners.size();
+                                    setAutoSlide();
+
+                                } else {
+                                    Log.e(TAG, "loadBanners: No banners found ");
+                                    Toast.makeText(context, "No banners found",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                            } else {
+                                Log.e(TAG, "loadBanners: " + statusObject.getString("message"));
+                                Toast.makeText(context, statusObject.getString("message"),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e(TAG, "onResponse: " + e.getMessage());
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
+                    }
+
+                }, error -> {
+
+                    if (error != null) {
+                        Log.e(TAG, "loadBanners: " + error.getMessage());
+                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+        VolleyQueue.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
     private void setAutoSlide() {

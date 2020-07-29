@@ -13,5 +13,11 @@
     <string name="your_city">Your City</string>
     <string name="wwyltd">What would you like to do?</string>
 
+    <!-- Dashboard items -->
+    <string name="item_phone">Phone</string>
+    <string name="item_tablet">Tablet</string>
+    <string name="item_smart_watch">Smart Watch</string>
+    <string name="item_recycle">Recycle</string>
+
 
 </resources>

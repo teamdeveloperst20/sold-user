@@ -14,7 +14,7 @@
         <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="@dimen/toolbar_size"
             android:background="@color/colorToolbarBackground"
             android:elevation="@dimen/elevation_toolbar"
             android:orientation="vertical">
@@ -81,255 +81,149 @@
 
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_slider"
+                android:gravity="center">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/sliderViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.rd.PageIndicatorView
+                    android:id="@+id/sliderIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/padding_double"
+                    android:padding="6dp"
+                    app:piv_animationType="fill"
+                    app:piv_dynamicCount="true"
+                    app:piv_interactiveAnimation="true"
+                    app:piv_padding="8dp"
+                    app:piv_radius="4dp"
+                    app:piv_selectedColor="@color/white"
+                    app:piv_unselectedColor="@color/white"
+                    app:piv_viewPager="@id/sliderViewPager" />
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/TextBold"
+                android:layout_marginStart="@dimen/padding"
+                android:layout_marginEnd="@dimen/padding"
+                android:text="@string/wwyltd"
+                android:textSize="@dimen/large_text" />
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/padding"
+                android:translationZ="@dimen/elevation_dashboard"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/radius_dashboard"
+                app:cardElevation="@dimen/elevation_z_dashboard">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_slider"
-                    android:layout_margin="@dimen/padding"
-                    android:translationZ="@dimen/elevation_slider"
-                    app:cardCornerRadius="@dimen/radius_slider"
-                    app:cardElevation="@dimen/elevation_slider">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/sliderViewPager"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
-                        <com.rd.PageIndicatorView
-                            android:id="@+id/sliderIndicator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="8dp"
-                            android:padding="6dp"
-                            app:piv_animationType="fill"
-                            app:piv_dynamicCount="true"
-                            app:piv_interactiveAnimation="true"
-                            app:piv_padding="8dp"
-                            app:piv_radius="4dp"
-                            app:piv_selectedColor="@color/white"
-                            app:piv_unselectedColor="@color/white"
-                            app:piv_viewPager="@id/sliderViewPager" />
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    style="@style/TextBold"
-                    android:layout_marginStart="@dimen/padding"
-                    android:layout_marginEnd="@dimen/padding"
-                    android:text="@string/wwyltd"
-                    android:textSize="@dimen/large_text" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/padding"
-                    android:translationZ="@dimen/elevation_dashboard"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/radius_dashboard"
-                    app:cardElevation="@dimen/elevation_z_dashboard">
-
-                    <!--<LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
+                            android:id="@+id/itemPhone"
+                            style="@style/DashboardItem">
 
-                            <LinearLayout style="@style/DashboardItem">
+                            <ImageView
+                                style="@style/DashboardItemIcon"
+                                android:contentDescription="@string/def_img_desc"
+                                android:src="@drawable/ic_item_phone" />
 
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 1" />
-
-                            </LinearLayout>
-
-                            <View style="@style/SeparatorDashboardVert" />
-
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 2" />
-
-                            </LinearLayout>
-
-                            <View style="@style/SeparatorDashboardVert" />
-
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 3" />
-
-                            </LinearLayout>
+                            <TextView
+                                style="@style/DashboardItemTitle"
+                                android:text="@string/item_phone" />
 
                         </LinearLayout>
 
-                        <View style="@style/SeparatorDashboardHorz" />
+                        <View style="@style/SeparatorDashboardVert" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
+                            android:id="@+id/itemTablet"
+                            style="@style/DashboardItem">
 
-                            <LinearLayout style="@style/DashboardItem">
+                            <ImageView
+                                style="@style/DashboardItemIcon"
+                                android:contentDescription="@string/def_img_desc"
+                                android:src="@drawable/ic_item_tablet" />
 
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 4" />
-
-                            </LinearLayout>
-
-                            <View style="@style/SeparatorDashboardVert" />
-
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 5" />
-
-                            </LinearLayout>
-
-                            <View style="@style/SeparatorDashboardVert" />
-
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 6" />
-
-                            </LinearLayout>
+                            <TextView
+                                style="@style/DashboardItemTitle"
+                                android:text="@string/item_tablet" />
 
                         </LinearLayout>
 
-                        <View style="@style/SeparatorDashboardHorz" />
+                    </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
+                    <View style="@style/SeparatorDashboardHorz" />
 
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 7" />
-
-                            </LinearLayout>
-
-                            <View style="@style/SeparatorDashboardVert" />
-
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 8" />
-
-                            </LinearLayout>
-
-                            <View style="@style/SeparatorDashboardVert" />
-
-                            <LinearLayout style="@style/DashboardItem">
-
-                                <ImageView
-                                    style="@style/DashboardItemIcon"
-                                    android:contentDescription="@string/def_img_desc"
-                                    android:src="@drawable/ic_note_24" />
-
-                                <TextView
-                                    style="@style/DashboardItemTitle"
-                                    android:layout_margin="@dimen/padding_half"
-                                    android:text="Item 9" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>-->
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/listDashboard"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/padding_half" />
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                </androidx.cardview.widget.CardView>
+                        <LinearLayout
+                            android:id="@+id/itemSmartWatch"
+                            style="@style/DashboardItem">
 
-            </LinearLayout>
+                            <ImageView
+                                style="@style/DashboardItemIcon"
+                                android:contentDescription="@string/def_img_desc"
+                                android:src="@drawable/ic_item_smart_watch" />
 
-        </androidx.core.widget.NestedScrollView>
+                            <TextView
+                                style="@style/DashboardItemTitle"
+                                android:text="@string/item_smart_watch" />
+
+                        </LinearLayout>
+
+                        <View style="@style/SeparatorDashboardVert" />
+
+                        <LinearLayout
+                            android:id="@+id/itemRecycle"
+                            style="@style/DashboardItem">
+
+                            <ImageView
+                                style="@style/DashboardItemIcon"
+                                android:contentDescription="@string/def_img_desc"
+                                android:src="@drawable/ic_item_recycle" />
+
+                            <TextView
+                                style="@style/DashboardItemTitle"
+                                android:text="@string/item_recycle" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
     </LinearLayout>
 

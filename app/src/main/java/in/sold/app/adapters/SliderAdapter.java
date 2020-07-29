@@ -2,7 +2,6 @@ package in.sold.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import in.sold.app.R;
-import in.sold.app.models.Slider;
+import in.sold.app.models.Banner;
 
 /**
  * Created by Sk Suraj
@@ -29,17 +27,17 @@ public class SliderAdapter extends PagerAdapter {
     private static final String TAG = SliderAdapter.class.getSimpleName();
     private LayoutInflater layoutInflater;
     private Context context;
-    private ArrayList<Slider> sliders;
+    private ArrayList<Banner> banners;
 
-    public SliderAdapter(ArrayList<Slider> sliders, Context context) {
-        this.sliders = sliders;
+    public SliderAdapter(ArrayList<Banner> banners, Context context) {
+        this.banners = banners;
         this.context = context;
         layoutInflater = ((Activity) context).getLayoutInflater();
     }
 
     @Override
     public int getCount() {
-        return sliders.size();
+        return banners.size();
     }
 
     @Override
@@ -55,19 +53,10 @@ public class SliderAdapter extends PagerAdapter {
         ImageView imgSlider = view.findViewById(R.id.imgSlider);
         TextView textTitle = view.findViewById(R.id.textTitle);
 
-        final Slider slider = sliders.get(position);
-        Picasso.get().load(slider.getImage()).into(imgSlider, new Callback() {
-            @Override
-            public void onSuccess() {
-            }
+        final Banner banner = banners.get(position);
 
-            @Override
-            public void onError(Exception e) {
-                Log.e(TAG, "onError: imgSlider -> " + e.getMessage());
-            }
-        });
-
-        textTitle.setText(slider.getTitle());
+        Picasso.get().load(banner.getImgPath()).into(imgSlider);
+        textTitle.setText(banner.getCaption());
 
         container.addView(view, 0);
         return view;

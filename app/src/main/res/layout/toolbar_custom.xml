@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_size"
+    android:background="@color/colorToolbarBackground"
+    android:elevation="@dimen/elevation_toolbar"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/def_img_desc"
+            android:onClick="onBackClick"
+            android:paddingStart="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
+            android:src="@drawable/ic_back_24" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            style="@style/TextRegular"
+            android:layout_gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textSize="@dimen/large_text" />
+
+    </LinearLayout>
+
+    <View style="@style/SeparatorHorz" />
+
+</LinearLayout>

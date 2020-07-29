@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import in.sold.app.R;
 
 
-public class OrdersFragment extends Fragment {
+public class ProductsFragment extends Fragment {
 
-    public OrdersFragment() {
+    public ProductsFragment() {
         // Required empty public constructor
     }
 
@@ -26,6 +26,6 @@ public class OrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_orders, container, false);
+        return inflater.inflate(R.layout.fragment_products, container, false);
     }
 }

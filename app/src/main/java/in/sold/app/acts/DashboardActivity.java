@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,7 +27,7 @@ public class DashboardActivity extends AppCompatActivity implements BottomNaviga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         init();
-        changeFragment(new HomeFragment());
+        changeFragment(new HomeFragment(), HomeFragment.class.getSimpleName());
     }
 
     private void init() {
@@ -39,21 +40,23 @@ public class DashboardActivity extends AppCompatActivity implements BottomNaviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_home:
-                changeFragment(new HomeFragment());
+                changeFragment(new HomeFragment(), HomeFragment.class.getSimpleName());
                 break;
             case R.id.item_orders:
-                changeFragment(new OrdersFragment());
+                changeFragment(new OrdersFragment(), OrdersFragment.class.getSimpleName());
                 break;
             case R.id.item_profile:
-                changeFragment(new ProfileFragment());
+                changeFragment(new ProfileFragment(), ProfileFragment.class.getSimpleName());
                 break;
         }
         return true;
     }
 
-    private void changeFragment(Fragment fragment) {
+    private void changeFragment(Fragment fragment, String title) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.layoutContentHolder, fragment)
-                .addToBackStack(null).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.layoutContentHolder, fragment, title)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
     }
 }

@@ -67,15 +67,20 @@
     </style>
 
     <style name="DashboardItemIcon">
-        <item name="android:layout_width">36dp</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:layout_marginTop">@dimen/padding_half</item>
+        <item name="android:layout_width">@dimen/dashboard_icon_size</item>
+        <item name="android:layout_height">@dimen/dashboard_icon_size</item>
+        <item name="android:padding">@dimen/dashboard_icon_padding</item>
+        <item name="android:layout_marginTop">@dimen/padding</item>
+        <item name="android:tint">@color/colorPrimary</item>
+        <item name="android:background">@drawable/bg_dashboard_icon</item>
     </style>
 
     <style name="DashboardItemTitle" parent="TextRegular">
         <item name="android:layout_marginTop">@dimen/padding_half</item>
+        <item name="android:layout_marginBottom">@dimen/padding</item>
         <item name="android:layout_marginStart">@dimen/padding_half</item>
         <item name="android:layout_marginEnd">@dimen/padding_half</item>
+        <item name="android:textSize">@dimen/normal_text</item>
     </style>
 
 </resources>

@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutSlider"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_slider"
-    android:orientation="vertical"
-    app:cardBackgroundColor="@color/colorBackground"
-    app:cardUseCompatPadding="false"
-    app:elevation="0dp"
-    android:elevation="0dp"
-    tools:targetApi="lollipop"
-    app:cardCornerRadius="@dimen/radius_slider">
+    android:layout_height="match_parent"
+    android:background="@color/colorTransparent">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/padding"
+        android:translationZ="@dimen/elevation_slider"
+        app:cardCornerRadius="@dimen/radius_slider"
+        app:cardElevation="@dimen/elevation_slider"
+        app:cardBackgroundColor="@color/colorTransparent">
 
-        <ImageView
-            android:id="@+id/imgSlider"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/def_img_desc"
-            android:scaleType="fitXY"/>
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="48dp">
-
-            <View
-                android:layout_width="2dp"
+            <ImageView
+                android:id="@+id/imgSlider"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/padding"
-                android:background="@color/colorPrimary"/>
+                android:contentDescription="@string/def_img_desc"
+                android:scaleType="fitXY"/>
 
-            <TextView
-                android:id="@+id/textTitle"
-                style="@style/TextRegular"
-                android:text="@string/app_name"
-                android:layout_gravity="center_vertical"
-                android:maxLines="2"
-                android:ellipsize="end"/>
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="48dp">
 
-        </LinearLayout>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/padding"
+                    android:background="@color/colorPrimary"/>
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/textTitle"
+                    style="@style/TextRegular"
+                    android:text="@string/app_name"
+                    android:layout_gravity="center_vertical"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
 
-</androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

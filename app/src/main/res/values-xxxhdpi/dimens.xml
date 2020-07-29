@@ -22,11 +22,6 @@
 
     <!-- Home page -->
     <dimen name="height_slider">230dp</dimen>
-    <dimen name="radius_slider">16dp</dimen>
-    <dimen name="elevation_slider">6dp</dimen>
-    <dimen name="radius_dashboard">16dp</dimen>
-    <dimen name="elevation_dashboard">2dp</dimen>
-    <dimen name="elevation_z_dashboard">4dp</dimen>
     <dimen name="dashboard_icon_size">48dp</dimen>
     <dimen name="dashboard_icon_padding">8dp</dimen>
 
